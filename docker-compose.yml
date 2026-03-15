@@ -1,0 +1,14 @@
+services:
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: user123
+      POSTGRES_PASSWORD: password123
+      POSTGRES_DB: school_db
+    ports:
+      - "5435:5432"
+    volumes:
+      - db_data:/var/lib/postgresql
+
+volumes:
+  db_data:
