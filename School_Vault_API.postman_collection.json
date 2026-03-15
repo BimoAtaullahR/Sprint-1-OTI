@@ -1,0 +1,159 @@
+{
+  "info": {
+    "name": "School Nutrition Vault API",
+    "description": "Koleksi endpoint untuk menguji API Mini-Hackathon MBG (Full CRUD)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "1. Ping Server",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/ping",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["ping"]
+        }
+      }
+    },
+    {
+      "name": "2. Tambah Barang Baru (Create Item)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"name\": \"Susu UHT Coklat 200ml\",\n    \"category\": \"Susu\",\n    \"stock\": 50,\n    \"minimum_stock\": 20,\n    \"unit\": \"Kotak\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/items",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["items"]
+        }
+      }
+    },
+    {
+      "name": "3. Lihat Semua Barang (Get Items)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/items",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["items"]
+        }
+      }
+    },
+    {
+      "name": "4. Ubah Data Barang (Update Item)",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"name\": \"Susu UHT Coklat 250ml (Updated)\",\n    \"category\": \"Susu\",\n    \"minimum_stock\": 25,\n    \"unit\": \"Kotak\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/items/1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["items", "1"]
+        },
+        "description": "Mengubah nama dan minimum_stock dari barang dengan ID 1"
+      }
+    },
+    {
+      "name": "5. Transaksi Barang Keluar (OUT)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"item_id\": 1,\n    \"type\": \"OUT\",\n    \"quantity\": 40,\n    \"notes\": \"Diberikan ke siswa kelas 1 & 2\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/transactions",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["transactions"]
+        }
+      }
+    },
+    {
+      "name": "6. Transaksi Barang Masuk (IN)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"item_id\": 1,\n    \"type\": \"IN\",\n    \"quantity\": 100,\n    \"notes\": \"Restok dari Dinas Kesehatan\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/transactions",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["transactions"]
+        }
+      }
+    },
+    {
+      "name": "7. Cek Stok Kritis (Critical Stocks)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/items/critical",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["items", "critical"]
+        }
+      }
+    },
+    {
+      "name": "8. Hapus Barang (Delete Item)",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/items/1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["items", "1"]
+        },
+        "description": "Menghapus barang dengan ID 1 beserta seluruh riwayat transaksinya"
+      }
+    }
+  ]
+}

@@ -1,14 +1,37 @@
+version: "3.8"
+
 services:
+  # 1. Database Container
   db:
-    image: postgres:latest
+    image: postgres:15-alpine
+    container_name: school_vault_db
+    restart: always
     environment:
-      POSTGRES_USER: user123
+      POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password123
-      POSTGRES_DB: school_db
+      POSTGRES_DB: mbg_inventory
     ports:
-      - "5435:5432"
+      - "5432:5432"
     volumes:
-      - db_data:/var/lib/postgresql
+      - ./ddl.sql:/docker-entrypoint-initdb.d/ddl.sql
+      - pgdata:/var/lib/postgresql/data
+
+  # 2. App Container (Aplikasi Golang kita)
+  app:
+    build: . # Membangun image dari Dockerfile di folder ini
+    container_name: school_vault_app
+    restart: always
+    ports:
+      - "8080:8080"
+    environment:
+      # Inject variable ke config/database.go
+      - DB_HOST=db # Menunjuk ke service 'db' di atas
+      - DB_PORT=5432
+      - DB_USER=postgres
+      - DB_PASSWORD=password123
+      - DB_NAME=mbg_inventory
+    depends_on:
+      - db # Pastikan database menyala lebih dulu sebelum app
 
 volumes:
-  db_data:
+  pgdata:
