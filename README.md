@@ -1,6 +1,6 @@
 # School Nutrition Vault API
 
-API backend untuk mengelola inventaris bahan/barang program gizi sekolah (stok, batas minimum, dan mutasi barang masuk/keluar).
+API backend untuk mengelola inventaris bahan/barang program MBG di sekolah-sekolah (stok, batas minimum, dan mutasi barang masuk/keluar).
 
 ## Tentang Proyek
 
